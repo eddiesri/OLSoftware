@@ -18,6 +18,7 @@ import { RegisterComponent } from './dynamic-components/register/register.compon
 import { SidebarComponent } from './static-components/sidebar/sidebar.component';
 import { NotFoundComponent } from './dynamic-components/not-found/not-found.component';
 import { LoginComponent } from './dynamic-components/login/login.component';
+import { AuthService } from './services/auth.service';
 
 
 const routes: Routes = [
@@ -53,7 +54,7 @@ const routes: Routes = [
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     FormsModule
   ],
-  providers: [AppComponent ],
+  providers: [ AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
