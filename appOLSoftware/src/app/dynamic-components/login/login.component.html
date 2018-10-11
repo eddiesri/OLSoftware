@@ -4,7 +4,7 @@
     <div class="card rounded border border-dark py-2">
       <div class="card-body ">
           <h2 class="card-title mt-3">Ingreso a la plataforma</h2>
-        <form class="text-left  px-3 py-2">
+        <form class="text-left  px-3 py-2" (submit)="onSubmitLogin()">
           <div class="form-group mt-4">
 
             <label for="inputEmailLogIn">Correo electrónico</label>
@@ -12,7 +12,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><i class="fas fa-at"></i></span>
                 </div>
-                <input type="email" class="form-control" id="inputEmailLogIn" placeholder="Ingrese su correo electrónico">
+                <input type="email" class="form-control" name = "email" [(ngModel)] = "user.email" id="inputEmailLogIn" placeholder="Ingrese su correo electrónico">
               </div>
           </div>
           <div class="form-group mt-4">
@@ -21,7 +21,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
                 </div>
-                <input type="password" class="form-control" id="inputPasswordLogIn" placeholder="Ingrese su contraseña">
+                <input type="password" class="form-control" name = "pass" [(ngModel)] = "user.pass" id="inputPasswordLogIn" placeholder="Ingrese su contraseña">
               </div>
           </div>
           <button type="submit" class="btn btn-primary btn-block mt-5"><div class="py-1">Ingresar</div></button>

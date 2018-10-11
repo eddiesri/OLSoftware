@@ -19,7 +19,8 @@ import { SidebarComponent } from './static-components/sidebar/sidebar.component'
 import { NotFoundComponent } from './dynamic-components/not-found/not-found.component';
 import { LoginComponent } from './dynamic-components/login/login.component';
 import { AuthService } from './services/auth.service';
-
+import { TableComponent } from './dynamic-components/table/table.component';
+import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
 
 const routes: Routes = [
 
@@ -27,6 +28,8 @@ const routes: Routes = [
   { path: 'inicio' , component: HomeComponent, pathMatch: 'full'},
   { path: '' , component: HomeComponent, pathMatch: 'full'},
   { path: 'register' , component: RegisterComponent, pathMatch: 'full'},
+  { path: 'tabla' , component: TableComponent, pathMatch: 'full'},
+
   { path: 'login' , component: LoginComponent, pathMatch: 'full'},
   { path: 'notFound' , component: NotFoundComponent, pathMatch: 'full'},
   { path: '**' , redirectTo: 'notFound' , pathMatch : 'full'}
@@ -42,6 +45,7 @@ const routes: Routes = [
     SidebarComponent,
     NotFoundComponent,
     LoginComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,9 +56,10 @@ const routes: Routes = [
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
-    FormsModule
+    FormsModule,
+    FlashMessagesModule
   ],
-  providers: [ AuthService ],
+  providers: [ AuthService , FlashMessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

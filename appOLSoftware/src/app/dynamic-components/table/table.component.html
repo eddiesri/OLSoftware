@@ -1,0 +1,107 @@
+<div class="row mt-5">
+  <div class="col-md-8">
+      <div class="row my-3"><button class="btn btn-info" data-toggle="modal" data-target="#modalCreate" type="button">Crear</button></div>
+      <div class="row ">
+          <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Nombres</th>
+                  <th scope="col">Apellidos</th>
+                  <th scope="col">Identicación (C.C)</th>
+                  <th scope="col">Rol asociado</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Teléfono</th>
+                  <th scope="col">Correo electrónico</th>
+                  <th scope="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let usuario of usuarios index as i">
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+              </tbody>
+            </table>
+         
+        </div>
+      
+  </div>
+  <div class="col-md-4">
+      <div class="card rounded border border-dark ">
+        <div class="card-body ">
+          <h4 class="card-title mt-3">Filtrar Usuarios</h4>
+          <form (submit)="onFilterSubmit()">
+            <div class="row">
+              <div class="form-group col-md-6"><label for="nombresFiltro">Nombres</label><input type="text" [(ngModel)]="filtro.nombres"
+                  name="nombresFiltro" id="nombresFiltro" class="form-control"></div>
+              <div class="form-group col-md-6"><label for="apellidosFiltro">Apellidos</label><input type="text"
+                  [(ngModel)]="filtro.apellidos" name="apellidosFiltro" id="apellidosFiltro" class="form-control"></div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6"><label for="identificaionFiltro">Identificación (C.C)</label><input type="text"
+                  [(ngModel)]="filtro.identificacion" name="identificaionFiltro" id="identificaionFiltro" class="form-control"></div>
+              <div class="form-group col-md-6"><label for="rolAsociadoFiltro">Rol Asociado</label><input type="text"
+                  [(ngModel)]="filtro.rolAsociado" name="rolAsociadoFiltro" id="rolAsociadoFiltro" class="form-control"></div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6"><label for="estadoFiltro">Estado</label><input type="text" [(ngModel)]="filtro.estado"
+                  name="estadoFiltro" id="estadoFiltro" class="form-control"></div>
+              <div class="form-group col-md-6"><label for="telefonoFiltro">Teléfono</label><input type="text" [(ngModel)]="filtro.telefono"
+                  name="telefonoFiltro" id="telefonoFiltro" class="form-control"></div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6"><label for="emailFiltro">Correo electrónico</label><input type="text"
+                  [(ngModel)]="filtro.email" name="emailFiltro" id="emailFiltro" class="form-control"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+
+<div  id="modalCreate" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nuevo Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (submit)="onNewSubmit()">
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group col-md-6"><label for="nombresNuevo">Nombres</label><input type="text" [(ngModel)]="nuevo.nombres" name="nombresNuevo"
+                class="form-control"></div>
+            <div class="form-group col-md-6"><label for="apellidosNuevo">Apellidos</label><input type="text" [(ngModel)]="nuevo.apellidos"
+                name="apellidosNuevo" class="form-control"></div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6"><label for="identificaionNuevo">Identificación (C.C)</label><input type="text" [(ngModel)]="nuevo.identificaion"
+                name="identificaionNuevo" class="form-control"></div>
+            <div class="form-group col-md-6"><label for="rolAsociadoNuevo">Rol Asociado</label><input type="text" [(ngModel)]="nuevo.rolAsociado"
+                name="rolAsociadoNuevo" class="form-control"></div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6"><label for="estadoNuevo">Estado</label><input type="text" [(ngModel)]="nuevo.estado" name="estadoNuevo"
+                class="form-control"></div>
+            <div class="form-group col-md-6"><label for="telefonoNuevo">Teléfono</label><input type="text" [(ngModel)]="nuevo.telefono" name="telefonoNuevo"
+                class="form-control"></div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6"><label for="emailNuevo">Correo electrónico</label><input type="text" [(ngModel)]="nuevo.email" name="emailNuevo"
+                class="form-control"></div>
+            <div class="form-group col-md-6"><label for="contrasenaNuevo">Contraseña</label><input type="text" [(ngModel)]="nuevo.contrasena"
+                name="contrasenaNuevo" class="form-control"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
