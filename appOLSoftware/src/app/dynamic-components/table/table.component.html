@@ -69,32 +69,58 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form (submit)="onNewSubmit()">
+      <form #usuarioform = "ngForm" (submit)="onNewSubmit(usuarioform)" >
         <div class="modal-body">
-          <div class="row">
-            <div class="form-group col-md-6"><label for="nombresNuevo">Nombres</label><input type="text" [(ngModel)]="nuevo.nombres" name="nombresNuevo"
-                class="form-control"></div>
-            <div class="form-group col-md-6"><label for="apellidosNuevo">Apellidos</label><input type="text" [(ngModel)]="nuevo.apellidos"
-                name="apellidosNuevo" class="form-control"></div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6"><label for="identificaionNuevo">Identificación (C.C)</label><input type="text" [(ngModel)]="nuevo.identificaion"
-                name="identificaionNuevo" class="form-control"></div>
-            <div class="form-group col-md-6"><label for="rolAsociadoNuevo">Rol Asociado</label><input type="text" [(ngModel)]="nuevo.rolAsociado"
-                name="rolAsociadoNuevo" class="form-control"></div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6"><label for="estadoNuevo">Estado</label><input type="text" [(ngModel)]="nuevo.estado" name="estadoNuevo"
-                class="form-control"></div>
-            <div class="form-group col-md-6"><label for="telefonoNuevo">Teléfono</label><input type="text" [(ngModel)]="nuevo.telefono" name="telefonoNuevo"
-                class="form-control"></div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-6"><label for="emailNuevo">Correo electrónico</label><input type="text" [(ngModel)]="nuevo.email" name="emailNuevo"
-                class="form-control"></div>
-            <div class="form-group col-md-6"><label for="contrasenaNuevo">Contraseña</label><input type="text" [(ngModel)]="nuevo.contrasena"
-                name="contrasenaNuevo" class="form-control"></div>
-          </div>
+            <div class="row mt-3">
+                <div class="form-group col-md-6">
+                  <label for="inputNombre">Nombre de Usuario</label>
+                  <input type="text" required class="form-control" id="inputNombre" name="inputNombre1" minlength="3" #inputNombre1="ngModel"  [(ngModel)]="usuarioService.selectUsuario.name" placeholder="Ingrese su Nombre Completo">
+                  <div class="valid-feedback">Campo Requerido (Mín. 3 caracteres)</div>
+                </div>
+                <div class="form-group col-md-6" >
+                  <label for="inputTipoId">Tipo identificación</label>
+                  <select  id="inputTipoId" required [(ngModel)]="usuarioService.selectUsuario.tipoId" name="inputTipoId1"  #inputTipoId1="ngModel" class="form-control">
+                    <option value="">Seleccione uno</option>
+                    <option value="cc">Cedula de Ciudadanía</option>
+                    <option value="ti">Tarjeta de identidad</option>
+                    <option value="te">Pasaporte</option>
+                  </select>
+                  <div class="valid-feedback">Seleccione una opción</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="form-group col-md-6">
+                  <label for="inputEmail">Correo electrónico</label>
+                  <input type="email" required minlength="3" class="form-control" id="inputEmail" name="inputEmail1"  #inputEmail1="ngModel" [(ngModel)]="usuarioService.selectUsuario.email" placeholder="Ingrese su correo electrónico">
+                  <div class="valid-feedback">
+                      Campo Requerido (Mín. 3 caracteres)
+                    </div>
+                </div>
+                <div class="form-group col-md-6 ">
+                  <label for="inputId">Numero de identificación</label>
+                  <input type="text" required minlength="8" class="form-control" id="inputId" name="inputId1" #inputId1="ngModel" [(ngModel)]="usuarioService.selectUsuario.identificacion" placeholder="Ingrese su correo electrónico">
+                  <div class="valid-feedback">
+                      Campo Requerido (Mín. 8 caracteres)
+                    </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="form-group col-md-6  ">
+                  <label for="inputPassword1">Contraseña</label>
+                  <input type="password" required  class="form-control" id="inputPassword1" name="inputPassword1" #inputPassword1="ngModel" [(ngModel)]="usuarioService.selectUsuario.pass1" placeholder="Ingrese su contraseña">
+                  <div class="valid-feedback">
+                      Contraseña Requerida 
+                    </div>
+                </div>
+                <div class="form-group col-md-6 ">
+                  <label for="inputPassword2">Confirmar Contraseña</label>
+                  <input type="password" required class="form-control" id="inputPassword2" name="inputPassword2" #inputPassword2="ngModel" [(ngModel)]="usuarioService.selectUsuario.pass2" placeholder="Ingrese su contraseña nuevamente">
+                  <div class="valid-feedback">
+                      Contraseña Requerida 
+                    </div>
+                </div>
+              </div>
+    
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>

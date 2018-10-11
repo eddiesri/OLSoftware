@@ -6,6 +6,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto ">
+          <li *ngIf="this.isLogin" class="nav-item " routerLinkActive="active"><a href="#" [routerLink]="['/tabla']" class="nav-link btn btn-toolbar text-light"> <i class="fas fa-user-alt"></i> Usuarios</a></li>
 
         </ul>
     <ul class="navbar-nav mx-auto ">

@@ -12,40 +12,58 @@
       <div class="card-body mx-3 my-3">
         <h2 class="card-title">Crea tu cuenta</h2>
 
-        <form class="mt-3" (submit)="onSubmitAddUser()">
+        <form class="needs-validation mt-3" novalidate (submit)="onSubmitAddUser()">
           <div class="row mt-3">
             <div class="form-group col-md-6">
               <label for="inputNombre">Nombre de Usuario</label>
-              <input type="email" class="form-control" id="inputNombre" name="inputNombre1"  [(ngModel)]="user.name" placeholder="Ingrese su Nombre Completo">
+              <input type="text" required class="form-control" id="inputNombre" name="inputNombre1" minlength="3"  [(ngModel)]="user.name" placeholder="Ingrese su Nombre Completo">
+              <div class="valid-feedback">
+                 Campo Requerido (Mín. 3 caracteres)
+                </div>
             </div>
             <div class="form-group col-md-6" >
               <label for="inputTipoId">Tipo identificación</label>
-              <select  id="inputTipoId" [(ngModel)]="user.typeId" name="inputTipoId1" class="form-control">
+              <select  id="inputTipoId" required [(ngModel)]="user.typeId" name="inputTipoId1" class="form-control">
                 <option value="">Seleccione uno</option>
                 <option value="cc">Cedula de Ciudadanía</option>
                 <option value="ti">Tarjeta de identidad</option>
                 <option value="te">Pasaporte</option>
               </select>
+              <div class="valid-feedback">
+                  Seleccione una opción
+                 </div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="form-group col-md-6">
               <label for="inputEmail">Correo electrónico</label>
-              <input type="email" class="form-control" id="inputEmail" name="inputEmail1" [(ngModel)]="user.email" placeholder="Ingrese su correo electrónico">
+              <input type="email" required minlength="3" class="form-control" id="inputEmail" name="inputEmail1" [(ngModel)]="user.email" placeholder="Ingrese su correo electrónico">
+              <div class="valid-feedback">
+                  Campo Requerido (Mín. 3 caracteres)
+                </div>
             </div>
             <div class="form-group col-md-6 ">
               <label for="inputId">Numero de identificación</label>
-              <input type="text" class="form-control" id="inputId" name="inputId1" [(ngModel)]="user.idNumber" placeholder="Ingrese su correo electrónico">
+              <input type="text" required minlength="8" class="form-control" id="inputId" name="inputId1" [(ngModel)]="user.idNumber" placeholder="Ingrese su correo electrónico">
+              <div class="valid-feedback">
+                  Campo Requerido (Mín. 8 caracteres)
+                </div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="form-group col-md-6  ">
               <label for="inputPassword1">Contraseña</label>
-              <input type="password" class="form-control" id="inputPassword1" name="inputPassword11" [(ngModel)]="user.pass1" placeholder="Ingrese su contraseña">
+              <input type="password" required  class="form-control" id="inputPassword1" name="inputPassword11" [(ngModel)]="user.pass1" placeholder="Ingrese su contraseña">
+              <div class="valid-feedback">
+                  Contraseña Requerida 
+                </div>
             </div>
             <div class="form-group col-md-6 ">
               <label for="inputPassword2">Confirmar Contraseña</label>
               <input type="password" required class="form-control" id="inputPassword2" name="inputPassword21" [(ngModel)]="user.pass2" placeholder="Ingrese su contraseña nuevamente">
+              <div class="valid-feedback">
+                  Contraseña Requerida 
+                </div>
             </div>
           </div>
 

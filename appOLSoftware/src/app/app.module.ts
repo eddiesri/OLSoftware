@@ -1,26 +1,32 @@
-import { RouterModule, Routes} from '@angular/router';
-
+// base
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+// auth
+import { AuthService } from './services/auth.service';
+// Forms
+import { FormsModule} from '@angular/forms';
+// fireBase
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+// routing
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule, Routes} from '@angular/router';
+// components
+/// static
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './static-components/header/header.component';
-import { FormsModule} from '@angular/forms';
 import { FooterComponent } from './static-components/footer/footer.component';
+/// dynamic
 import { HomeComponent } from './dynamic-components/home/home.component';
+
 import { RegisterComponent } from './dynamic-components/register/register.component';
-import { SidebarComponent } from './static-components/sidebar/sidebar.component';
 import { NotFoundComponent } from './dynamic-components/not-found/not-found.component';
 import { LoginComponent } from './dynamic-components/login/login.component';
-import { AuthService } from './services/auth.service';
 import { TableComponent } from './dynamic-components/table/table.component';
-import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
 
 const routes: Routes = [
 
@@ -42,7 +48,6 @@ const routes: Routes = [
     FooterComponent,
     HomeComponent,
     RegisterComponent,
-    SidebarComponent,
     NotFoundComponent,
     LoginComponent,
     TableComponent,
@@ -56,10 +61,10 @@ const routes: Routes = [
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
-    FormsModule,
-    FlashMessagesModule
-  ],
-  providers: [ AuthService , FlashMessagesService],
+    AngularFireDatabaseModule,
+    FormsModule
+    ],
+  providers: [ AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

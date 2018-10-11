@@ -2,7 +2,3 @@
 body{
     background-image: radial-gradient(  #004d7a,#051937 ) ;
 }
-
-.alert.flash-message{
-    margin-top: 10px;
-}
