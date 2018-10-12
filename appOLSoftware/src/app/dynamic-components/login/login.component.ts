@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-  onSubmitLogin(email, pass) {
+  onSubmitLogin() {
     this.authService.logIn(this.user.email , this.user.pass).then((res) => {
       console.log('res' , res);
       this.router.navigate(['/tabla']);
