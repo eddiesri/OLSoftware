@@ -6,18 +6,20 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto ">
-          <li *ngIf="this.isLogin" class="nav-item " routerLinkActive="active"><a href="#" [routerLink]="['/tabla']" class="nav-link btn btn-toolbar text-light"> <i class="fas fa-user-alt"></i> Usuarios</a></li>
+          <li *ngIf="this.isLogin" class="nav-item " routerLinkActive="active"><a href="#" [routerLink]="['/tabla']" class="nav-link btn btn-toolbar text-light"> <i class="fas fa-user-alt"></i> Empleados</a></li>
 
         </ul>
     <ul class="navbar-nav mx-auto ">
         <li *ngIf="!this.isLogin" class="nav-item mx-5" routerLinkActive="active"><a [routerLink]="['/login']" class="nav-link btn btn-toolbar">Login</a></li>
         <li *ngIf="!this.isLogin" class="nav-item mx-5" routerLinkActive="active"><a [routerLink]="['/register']" class="nav-link btn btn-primary text-light">Registrarse</a></li>
-        <li *ngIf="this.isLogin" class="nav-item " routerLinkActive="active">
-          <div class="rounded">
-            <img src="../../../assets/images/logoLogin.png" width="40px" height="40px" alt="">
-          </div>
+        <li *ngIf="this.isLogin" class="nav-item mx-5" routerLinkActive="active">
+            <div class="text-center">
+                <img src="../../../assets/images/logoLogin.png" class="rounded-circle border border-success" width="40px" height="40px" alt="">
+                <label class="text-warning">{{this.emailUsuario}}</label>
+            </div>
+
         </li>
-        <li *ngIf="this.isLogin" class="nav-item " routerLinkActive="active"><a href="#" (click)= "onClickLogOut()" class="nav-link btn btn-toolbar text-light"> <i class="fas fa-sign-out-alt"></i></a></li>
+        <li *ngIf="this.isLogin" class="nav-item " routerLinkActive="active"><a (click)= "onClickLogOut()" class="nav-link btn btn-toolbar text-light"> Salir <i class="fas fa-sign-out-alt"></i></a></li>
 
       </ul>
     </div>

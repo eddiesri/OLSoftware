@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  public isLogin: boolean;
+  public emailUsuario: string;
+  constructor(public authService: AuthService) { }
 
-  constructor() { }
+  ngOnInit( ) {
+    this.authService.getAuth().subscribe( auth => {
 
-  ngOnInit() {
+      if (auth) {
+        this.isLogin       = true;
+        this.emailUsuario = auth.email;
+
+      } else {
+        this.isLogin = false;
+      }
+    });
   }
 
 }

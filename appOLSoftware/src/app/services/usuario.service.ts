@@ -1,44 +1,43 @@
 import { Injectable } from '@angular/core';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore, AngularFirestoreCollection , AngularFirestoreDocument} from '@angular/fire/firestore';
+
 import { Usuario } from '../modules/usuario';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Injectable()
 export class UsuarioService {
-  usuariosList: AngularFireList<any>;
-  selectUsuario: Usuario = new Usuario();
+  usuariosCollection: AngularFirestoreCollection<Usuario>;
+  usuarios: Observable<Usuario[]>;
+  usuariosDoc: AngularFirestoreDocument<Usuario>;
 
-  constructor(private angFDB: AngularFireDatabase) { }
-
+  constructor(public afs: AngularFirestore) {
+    this.usuariosCollection = this.afs.collection('Usuarios');
+    this.usuarios = this.usuariosCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Usuario;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    });
+  }
   getUsuarios() {
-    return this.usuariosList = this.angFDB.list('usuarios');
+    return this.usuarios;
   }
 
-  insertUsuario(usuario: Usuario) {
-    this.usuariosList.push({
-      $key: usuario.$key ,
-      name: usuario.name ,
-      email: usuario.email ,
-      identificacion: usuario.identificacion ,
-      tipoId: usuario.tipoId ,
-      pass1 : usuario.pass1,
-      pass2 : usuario.pass2
-    });
+  addUsuario(usuario: Usuario) {
+    this.usuariosCollection.add(usuario);
+  }
+
+  deleteUsuario(usuario: Usuario) {
+    this.usuariosDoc = this.afs.doc(`Usuarios/${usuario.id}`);
+    this.usuariosDoc.delete();
   }
 
   updateUsuario(usuario: Usuario) {
-    this.usuariosList.update(usuario.$key , {
-      $key: usuario.$key ,
-      name: usuario.name ,
-      email: usuario.email ,
-      identificacion: usuario.identificacion ,
-      tipoId: usuario.tipoId ,
-      pass1 : usuario.pass1,
-      pass2 : usuario.pass2
-    });
+    this.usuariosDoc = this.afs.doc(`Usuarios/${usuario.id}`);
+    this.usuariosDoc.update(usuario);
   }
-
-  deleteUsuario($key: string) {
-    this.usuariosList.remove($key);
-  }
-
 }

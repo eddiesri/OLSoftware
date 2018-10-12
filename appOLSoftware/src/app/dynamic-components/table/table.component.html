@@ -1,129 +1,139 @@
 <div class="row mt-5">
-  <div class="col-md-8">
-      <div class="row my-3"><button class="btn btn-info" data-toggle="modal" data-target="#modalCreate" type="button">Crear</button></div>
-      <div class="row ">
-          <table class="table table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">Nombres</th>
-                  <th scope="col">Apellidos</th>
-                  <th scope="col">Identicación (C.C)</th>
-                  <th scope="col">Rol asociado</th>
-                  <th scope="col">Estado</th>
-                  <th scope="col">Teléfono</th>
-                  <th scope="col">Correo electrónico</th>
-                  <th scope="col">Acción</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let usuario of usuarios index as i">
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-              </tbody>
-            </table>
-         
-        </div>
-      
+
+  <div class="col-md-12 ">
+      <div class="card rounded border border-dark bg-light ">
+          <div class="card-body ">
+            <h2 class="card-title mt-3">Empleados</h2>
+
+                <div class="accordion" id="accordionExample">
+                    <div class="card rounded border border-light bg-transparent text-light">
+                      <div class="card-header  bg-light" id="headingOne">
+                        <div class="row">
+                          <div class="col-md-2">
+                              <h5 class="mb-0">
+                                  <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                      Mostrar Filtros
+                                  </button>
+                                </h5>
+                          </div>
+                          <div class="col-md-2 offset-8">
+                                  <button class="btn btn-info btn-block" data-toggle="modal" data-target="#modalCreate" type="button" (click) = "newUsuario()">Crear</button>
+                
+                          </div>
+                        </div>
+
+                      </div>
+                  
+                      <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body bg-secondary text-light">
+                            <form (ngSubmit)="filtrar()">
+                                <div class="row mt-3">
+                                  <div class="form-group col-md-3">
+                                    <label for="filtroNombre">Nombre de Usuario </label>
+                                    <input type="text"  class="form-control" id="filtroNombre" name="filtroNombre"  [(ngModel)]="filtro.name"
+                                      placeholder="Nombre de Usuario">
+                      
+                                  </div>
+                                  <div class="form-group col-md-3 ">
+                                    <label for="filtroId">Numero de identificación</label>
+                                    <input type="text"  class="form-control" id="filtroId" name="filtroId" [(ngModel)]="filtro.idNumber"
+                                      placeholder="No. de identificación">
+
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                      <label for="filtroTel">Teléfono</label>
+                                      <input type="text"  class="form-control" id="filtroTel" name="filtroTel" [(ngModel)]="filtro.phone"
+                                        placeholder="Teléfono">
+  
+                                    </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="filtroEmail">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="filtroEmail" name="filtroEmail"
+                                      [(ngModel)]="filtro.email"  placeholder="Correo electrónico">
+
+                                  </div>
+                      
+
+                                </div>
+                                <div class="row"><div class="col-md-2"><button type="submit" class="btn btn-primary btn-block"><i class="fas fa-filter"></i> Filtrar </button></div> </div>
+                              </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+<div class="table-responsive">
+    <table class="table ">
+        <thead>
+          <tr>
+            <th scope="col">Nombre Usuario</th>
+            <th scope="col">Identicación </th>
+            <th scope="col">Teléfono </th>
+            <th scope="col">Correo Electrónico</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuariosListFiltrada index as i">
+  
+            <th scope="row"> {{ usuario.name }} </th>
+            <td> {{ usuario.idNumber }} </td>
+            <td> {{ usuario.phone }} </td>
+            <td> {{ usuario.email }} </td>
+            <td><button class="btn btn-outline-success" (click)="editUsuario($event, usuario)" data-toggle="modal" data-target="#modalCreate"><i class="fas fa-pencil-alt" ></i></button> <button class="btn btn-outline-danger" (click)="deleteUsuario($event, usuario)"><i class="fas fa-trash-alt"></i></button>  </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
   </div>
-  <div class="col-md-4">
-      <div class="card rounded border border-dark ">
-        <div class="card-body ">
-          <h4 class="card-title mt-3">Filtrar Usuarios</h4>
-          <form (submit)="onFilterSubmit()">
-            <div class="row">
-              <div class="form-group col-md-6"><label for="nombresFiltro">Nombres</label><input type="text" [(ngModel)]="filtro.nombres"
-                  name="nombresFiltro" id="nombresFiltro" class="form-control"></div>
-              <div class="form-group col-md-6"><label for="apellidosFiltro">Apellidos</label><input type="text"
-                  [(ngModel)]="filtro.apellidos" name="apellidosFiltro" id="apellidosFiltro" class="form-control"></div>
-            </div>
-            <div class="row">
-              <div class="form-group col-md-6"><label for="identificaionFiltro">Identificación (C.C)</label><input type="text"
-                  [(ngModel)]="filtro.identificacion" name="identificaionFiltro" id="identificaionFiltro" class="form-control"></div>
-              <div class="form-group col-md-6"><label for="rolAsociadoFiltro">Rol Asociado</label><input type="text"
-                  [(ngModel)]="filtro.rolAsociado" name="rolAsociadoFiltro" id="rolAsociadoFiltro" class="form-control"></div>
-            </div>
-            <div class="row">
-              <div class="form-group col-md-6"><label for="estadoFiltro">Estado</label><input type="text" [(ngModel)]="filtro.estado"
-                  name="estadoFiltro" id="estadoFiltro" class="form-control"></div>
-              <div class="form-group col-md-6"><label for="telefonoFiltro">Teléfono</label><input type="text" [(ngModel)]="filtro.telefono"
-                  name="telefonoFiltro" id="telefonoFiltro" class="form-control"></div>
-            </div>
-            <div class="row">
-              <div class="form-group col-md-6"><label for="emailFiltro">Correo electrónico</label><input type="text"
-                  [(ngModel)]="filtro.email" name="emailFiltro" id="emailFiltro" class="form-control"></div>
-            </div>
-          </form>
-        </div>
-      </div>
+</div>
   </div>
 
-<div  id="modalCreate" class="modal" tabindex="-1" role="dialog">
+</div>
+
+
+<div id="modalCreate" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Nuevo Usuario</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title">Nuevo Empleado</h5>
+        <button #btnClose type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form #usuarioform = "ngForm" (submit)="onNewSubmit(usuarioform)" >
+      <form (ngSubmit)="onNewSubmit($event)" #formNuevo="ngForm" class="needs-validation" novalidate>
         <div class="modal-body">
-            <div class="row mt-3">
-                <div class="form-group col-md-6">
-                  <label for="inputNombre">Nombre de Usuario</label>
-                  <input type="text" required class="form-control" id="inputNombre" name="inputNombre1" minlength="3" #inputNombre1="ngModel"  [(ngModel)]="usuarioService.selectUsuario.name" placeholder="Ingrese su Nombre Completo">
-                  <div class="valid-feedback">Campo Requerido (Mín. 3 caracteres)</div>
-                </div>
-                <div class="form-group col-md-6" >
-                  <label for="inputTipoId">Tipo identificación</label>
-                  <select  id="inputTipoId" required [(ngModel)]="usuarioService.selectUsuario.tipoId" name="inputTipoId1"  #inputTipoId1="ngModel" class="form-control">
-                    <option value="">Seleccione uno</option>
-                    <option value="cc">Cedula de Ciudadanía</option>
-                    <option value="ti">Tarjeta de identidad</option>
-                    <option value="te">Pasaporte</option>
-                  </select>
-                  <div class="valid-feedback">Seleccione una opción</div>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="form-group col-md-6">
-                  <label for="inputEmail">Correo electrónico</label>
-                  <input type="email" required minlength="3" class="form-control" id="inputEmail" name="inputEmail1"  #inputEmail1="ngModel" [(ngModel)]="usuarioService.selectUsuario.email" placeholder="Ingrese su correo electrónico">
-                  <div class="valid-feedback">
-                      Campo Requerido (Mín. 3 caracteres)
-                    </div>
-                </div>
-                <div class="form-group col-md-6 ">
-                  <label for="inputId">Numero de identificación</label>
-                  <input type="text" required minlength="8" class="form-control" id="inputId" name="inputId1" #inputId1="ngModel" [(ngModel)]="usuarioService.selectUsuario.identificacion" placeholder="Ingrese su correo electrónico">
-                  <div class="valid-feedback">
-                      Campo Requerido (Mín. 8 caracteres)
-                    </div>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="form-group col-md-6  ">
-                  <label for="inputPassword1">Contraseña</label>
-                  <input type="password" required  class="form-control" id="inputPassword1" name="inputPassword1" #inputPassword1="ngModel" [(ngModel)]="usuarioService.selectUsuario.pass1" placeholder="Ingrese su contraseña">
-                  <div class="valid-feedback">
-                      Contraseña Requerida 
-                    </div>
-                </div>
-                <div class="form-group col-md-6 ">
-                  <label for="inputPassword2">Confirmar Contraseña</label>
-                  <input type="password" required class="form-control" id="inputPassword2" name="inputPassword2" #inputPassword2="ngModel" [(ngModel)]="usuarioService.selectUsuario.pass2" placeholder="Ingrese su contraseña nuevamente">
-                  <div class="valid-feedback">
-                      Contraseña Requerida 
-                    </div>
-                </div>
-              </div>
-    
+          <div class="row mt-3">
+
+            <div class="form-group col-md-6">
+              <label for="inputNombre">Nombre de Usuario</label>
+              <input type="text" required class="form-control" id="inputNombre" name="inputNombre1" 
+                [(ngModel)]="nuevo.name" placeholder="Nombre de Usuario">
+            </div>
+            <div class="form-group col-md-6 ">
+              <label for="inputId">Numero de identificación</label>
+              <input type="text" required  class="form-control" id="inputId" name="inputId1" [(ngModel)]="nuevo.idNumber"
+                placeholder="No. de identificación">
+
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="form-group col-md-6">
+              <label for="inputEmail">Correo electrónico</label>
+              <input type="email" required  class="form-control" id="inputEmail" name="inputEmail1"
+                [(ngModel)]="nuevo.email" placeholder="Correo electrónico">
+
+            </div>
+            <div class="form-group col-md-6 ">
+              <label for="inputId">Teléfono</label>
+              <input type="text" required  class="form-control" id="inputTel" name="inputTel1" [(ngModel)]="nuevo.phone"
+                placeholder="Teléfono">
+
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn-primary" >Guardar</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
       </form>

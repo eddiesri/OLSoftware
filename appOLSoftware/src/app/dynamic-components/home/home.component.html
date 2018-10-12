@@ -2,5 +2,7 @@
     <h1 class="display-4 my-3">Bienvenido!</h1>
     <p class="lead">Nuestra App de OL Software te permitirá gestionar los usuarios que tengas registrados </p>
     <hr class="my-4">
-    <p>Puedes registrarte para empezar a registrar tus usuarios. En caso de que ya tengas una cuenta, puedes loguearte con tu correo electrónico. </p>
+    <p *ngIf="!this.isLogin">Puedes registrarte para empezar a registrar tus usuarios. En caso de que ya tengas una cuenta, puedes loguearte con tu correo electrónico. </p>
+    <p *ngIf="this.isLogin"> Hola {{ this.emailUsuario }}! puedes editar los empleados del sistema presionando en la pestaña Empleados  </p>
+
   </div>

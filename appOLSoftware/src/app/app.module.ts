@@ -1,8 +1,10 @@
 // base
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// auth
+// services
 import { AuthService } from './services/auth.service';
+import { UsuarioService } from './services/usuario.service';
+
 // Forms
 import { FormsModule} from '@angular/forms';
 // fireBase
@@ -12,6 +14,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
 // routing
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes} from '@angular/router';
@@ -22,7 +25,6 @@ import { HeaderComponent } from './static-components/header/header.component';
 import { FooterComponent } from './static-components/footer/footer.component';
 /// dynamic
 import { HomeComponent } from './dynamic-components/home/home.component';
-
 import { RegisterComponent } from './dynamic-components/register/register.component';
 import { NotFoundComponent } from './dynamic-components/not-found/not-found.component';
 import { LoginComponent } from './dynamic-components/login/login.component';
@@ -57,14 +59,14 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
 
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase, 'angular-fs'),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFireDatabaseModule,
     FormsModule
     ],
-  providers: [ AuthService],
+  providers: [ AuthService, UsuarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
